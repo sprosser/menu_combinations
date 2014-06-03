@@ -1,5 +1,6 @@
-require_relative '../lib/menu_combinations'
 require_relative '../lib/permutations'
+require_relative '../lib/orders'
+require_relative '../lib/menu_combinations'
 
 describe MenuCombinations do
   let(:file) { File.read("spec/files/menu.txt") }
@@ -33,9 +34,19 @@ describe MenuCombinations do
 
   describe "price_combinations" do
     it "finds the price combinations that meet the target price" do
-      new_menu.price_combinations
+      price_combinations = [[2.15, 3.55, 3.55, 5.8], [2.15, 2.15, 2.15, 2.15, 2.15, 2.15, 2.15]]
+      expect(new_menu.price_combinations).to eq(price_combinations)
+    end
+  end
 
-      Permutations.should receive(:new).with(new_menu.target_price, new_menu.menu)
+  describe "find_order_combinations" do
+    it "returns the orders to meet the target price" do
+      expect(new_menu.find_order_combinations.size).to eq(2)
+    end
+
+    it "returns the whole order(food and cost) along with the total" do
+      whole_order = [{"mixed fruit"=>2.15}, {"hot wings"=>3.55}, {"hot wings"=>3.55}, {"sampler plate"=>5.8}, {"TOTAL"=>15.05}]
+      expect(new_menu.find_order_combinations.first).to eq(whole_order)
     end
   end
 end

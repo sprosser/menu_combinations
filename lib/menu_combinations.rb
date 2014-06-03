@@ -1,3 +1,6 @@
+require 'permutations'
+require 'orders'
+
 class MenuCombinations
   def initialize file
     @text = file.split(/\n|\,/)
@@ -17,6 +20,13 @@ class MenuCombinations
   end
 
   def price_combinations
-    Permutations.new(self.target_price, self.menu)
+    Permutations.new(self.target_price, self.menu).find_matching_combinations
+  end
+
+  def find_order_combinations
+    self.price_combinations.inject([]) do |result, price|
+      result << Orders.new(self.menu, price).order
+      result
+    end
   end
 end
