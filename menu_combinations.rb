@@ -10,4 +10,9 @@ class MenuCombinations
   def format_price_for amount
     amount.gsub(/\$/, '').to_f
   end
+
+  def menu
+    menu = @text[1..-1].each_slice(2).to_a
+    Hash[menu.map {|food, price| [food, self.format_price_for(price)] }]
+  end
 end
