@@ -1,4 +1,4 @@
-require_relative '../menu_combinations'
+require_relative '../lib/menu_combinations'
 
 describe MenuCombinations do
   let(:file) { File.read("spec/files/menu.txt") }
@@ -22,5 +22,9 @@ describe MenuCombinations do
                                   "mozzarella sticks"=>4.2,
                                   "sampler plate"    =>5.8
                                  })
+  end
+
+  it "finds the price combinations that meet the target price" do
+
   end
 end

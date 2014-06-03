@@ -15,4 +15,8 @@ class MenuCombinations
     menu = @text[1..-1].each_slice(2).to_a
     Hash[menu.map {|food, price| [food, self.format_price_for(price)] }]
   end
+
+  def price_combinations
+    Permutations.new(self.target_price, self.menu)
+  end
 end
